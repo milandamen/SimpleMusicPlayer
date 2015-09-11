@@ -1,0 +1,62 @@
+
+#playerAndPlaylistContainer {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    margin: 0;
+}
+
+#player {
+    width: 100%;
+}
+
+#playerContainer {
+    height: 58px;
+    background: lightgray;
+}
+
+#playerContainer button {
+    float: right;
+}
+
+#playlist {
+    list-style-type: none;
+    margin-left: 0;
+    padding-left: 0;
+    margin-top: 0;
+    padding-top: 0;
+    height: 100%;
+    overflow: auto;
+}
+
+#songListContainer {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    margin: 0;
+}
+
+#songListContainer ul {
+    list-style-type: none;
+}
+
+#songListContainer > ul {
+    margin-left: 0;
+    padding-left: 0;
+    margin-top: 0;
+    padding-top: 0;
+    height: 100%;
+    overflow: auto;
+}
+
+#songListContainer li i {
+    background: url('plus.png');
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    vertical-align: bottom;
+}
