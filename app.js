@@ -14,8 +14,6 @@ function play(index) {
         playlist[index].play();
         player.currentPlayIndex = index;
         $('#playerContainer .songName').text(playlist[index].name);
-    } else {
-        player.currentPlayIndex = -1;
     }
 }
 
@@ -40,7 +38,7 @@ function add(element) {
 
     $('#playlist').append(
         '<li>' +
-            '<a href="#player" onclick="playSongFromPlaylist(this);" data-index="' + playlist.length + '">' +
+            '<a href="#player" onclick="playSongFromPlaylist(this);" data-index="' + (playlist.length - 1) + '">' +
                 song.name +
             '</a>' +
         '</li>'
@@ -53,8 +51,6 @@ function addFolder(element) {
     songs.each(function() {
         add(this);
     });
-
-    console.log(playlist);
 }
 
 function playIfFirstSong() {
@@ -64,6 +60,5 @@ function playIfFirstSong() {
 }
 
 function playSongFromPlaylist(element) {
-    var li = element.parentNode;
-
+    play(+element.dataset.index);
 }
