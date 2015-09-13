@@ -32,9 +32,13 @@ include 'views/partials/header.php';
 <div id="songListContainer">
 
 <?php
-$filelist = scandir_recursive(App::$config->music_dir);
+try {
+    $filelist = scandir_recursive(App::$config->music_dir);
 
-outputFileList($filelist);
+    outputFileList($filelist);
+} catch (Exception $e) {
+    die('An error occured! ' + $e->getMessage());
+}
 
 /**
  * Parse the file list and prepare and output it to the view.
@@ -60,7 +64,6 @@ function outputFileList(array $array) {
                 echo '</li>';
             }
         }
-        echo '</li>';
     }
 
     echo '</ul>';

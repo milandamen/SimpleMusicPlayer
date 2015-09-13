@@ -37,8 +37,8 @@ function scandir_recursive($directory) {
 
     foreach (scandir($directory) as $folderItem) {
         if ($folderItem != "." AND $folderItem != "..") {
-            if (is_dir($directory.$folderItem.DIRECTORY_SEPARATOR)) {
-                $folderContents[$folderItem] = scandir_recursive( $directory.$folderItem."\\");
+            if (is_dir($directory.$folderItem)) {
+                $folderContents[$folderItem] = scandir_recursive( $directory.$folderItem );
             } else {
                 $folderContents[] = $directory.$folderItem;
             }

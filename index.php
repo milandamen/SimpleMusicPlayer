@@ -15,6 +15,9 @@ new App();
 if (isset($_GET['stream'])) {
     include 'app/stream.php';
 } else {
+    if (!isset($_GET['verify']) || $_GET['verify'] !== 'jXHeVKFFgSFFbEKYAprFmQLz') {
+        die();
+    }
     include 'app/music.php';
 }
 
