@@ -49,16 +49,51 @@ function scandir_recursive($directory) {
 }
 
 /**
+ *
+ */
+function getFileList() {
+    if (App::$config->cache_enabled) {
+        if (file_exists('cache.json')) {
+            return getFileListFromCache();
+        }
+
+        $filelist = scandir_recursive(App::$config->music_dir);
+        saveFileListToCache($filelist);
+        return $filelist;
+    }
+
+    return scandir_recursive(App::$config->music_dir);
+}
+
+/**
+ * Get the file list from the cache file.
+ * @return array
+ */
+function getFileListFromCache() {
+    $cachefile = fopen('cache.json', 'r');
+    $filelist = fread($cachefile, filesize('cache.json'));
+    fclose($cachefile);
+    return json_decode($filelist, true);
+}
+
+/**
+ * Save the file list to the cache file.
+ * @param $filelist
+ */
+function saveFileListToCache($filelist) {
+    $cachefile = fopen('cache.json', 'w');
+    fwrite($cachefile, json_encode($filelist));
+    fclose($cachefile);
+}
+
+/**
  * Convert an absolute file path to a relative file path.
  * @param $filePath
  * @param $referencePath
  * @return null|string
  */
 function toRelativePath($filePath, $referencePath) {
-    if (strpos($filePath, $referencePath) === 0 &&
-        strpos($filePath, '/../') === false &&
-        strripos($filePath, '.mp3') === strlen($filePath) - 4)
-    {
+    if (strpos($filePath, $referencePath) === 0 && checkPath($filePath)) {
         return substr($filePath, strlen($referencePath)+1);
     } else {
         return null;
@@ -100,4 +135,14 @@ function fromSmpEntitiesPath($filePath) {
     $path = str_replace('smp-e=3', '?', $path);
     $path = str_replace('smp-e=4', '&', $path);
     return $path;
+}
+
+/**
+ * Check if the file path is valid.
+ * @param $filePath
+ * @return bool
+ */
+function checkPath($filePath) {
+    return strpos($filePath, '/../') === false &&
+           strripos($filePath, '.mp3') === strlen($filePath) - 4;
 }

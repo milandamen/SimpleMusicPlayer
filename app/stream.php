@@ -9,7 +9,7 @@
 $relpath = fromSmpEntitiesPath($_GET['stream']);
 $fullpath = App::$config->music_dir . DIRECTORY_SEPARATOR . $relpath;
 
-if (file_exists($fullpath)) {
+if (checkPath($fullpath) && file_exists($fullpath)) {
     header($_SERVER["SERVER_PROTOCOL"] . ' 200 OK');
     //header('Cache-Control: public'); // needed for i.e.
     header('Content-Type: audio/mpeg');

@@ -33,11 +33,11 @@ include 'views/partials/header.php';
 
 <?php
 try {
-    $filelist = scandir_recursive(App::$config->music_dir);
+    $filelist = getFileList();
 
     outputFileList($filelist);
 } catch (Exception $e) {
-    die('An error occured! ' + $e->getMessage());
+    die('An error occured! ' . $e->getMessage());
 }
 
 /**
