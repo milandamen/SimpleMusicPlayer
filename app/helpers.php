@@ -43,7 +43,6 @@ function scandir_recursive($directory) {
                 $currentFolderContents = scandir_recursive( $directory.$folderItem );
                 if (count($currentFolderContents)) {
                     $folderContents[$folderItem] = $currentFolderContents;
-                    printArray($folderContents[$folderItem]);
                 }
             } else {
                 if (isMP3($folderItem)) {
