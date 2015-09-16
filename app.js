@@ -21,6 +21,10 @@ function playNext() {
     play(player.currentPlayIndex + 1);
 }
 
+function playPrevious() {
+    play(player.currentPlayIndex - 1);
+}
+
 /**************************************/
 /******** Playlist Visualising ********/
 /**************************************/

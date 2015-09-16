@@ -15,7 +15,7 @@ include 'views/partials/header.php';
             Your browser does not support the audio tag.
         </audio>
         <span class="songName">No song playing.</span>
-        <button onclick="playNext();">
+        <button onclick="playPrevious();">
             Play Next
         </button>
         <button onclick="playNext();">
