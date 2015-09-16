@@ -36,7 +36,7 @@ function scandir_recursive($directory) {
     $directory = realpath($directory).DIRECTORY_SEPARATOR;
 
     foreach (scandir($directory) as $folderItem) {
-        if ($folderItem != "." AND $folderItem != "..") {
+        if ($folderItem != "." AND $folderItem != ".." && checkPathBounds($directory.$folderItem)) {
             if (is_dir($directory.$folderItem)) {
                 $folderContents[$folderItem] = scandir_recursive( $directory.$folderItem );
             } else {
@@ -93,7 +93,7 @@ function saveFileListToCache($filelist) {
  * @return null|string
  */
 function toRelativePath($filePath, $referencePath) {
-    if (strpos($filePath, $referencePath) === 0 && checkPath($filePath)) {
+    if (checkPathBounds($filePath) && checkPath($filePath)) {
         return substr($filePath, strlen($referencePath)+1);
     } else {
         return null;
@@ -145,4 +145,18 @@ function fromSmpEntitiesPath($filePath) {
 function checkPath($filePath) {
     return strpos($filePath, '/../') === false &&
            strripos($filePath, '.mp3') === strlen($filePath) - 4;
+}
+
+/**
+ * Check if path is inside music directory.
+ * @param $filePath
+ * @return bool
+ * @throws Exception
+ */
+function checkPathBounds($filePath) {
+    if (strpos($filePath, App::$config->music_dir) !== 0) {
+        throw new Exception('The path specified is not inside the music directory. Please check your config file.');
+    }
+
+    return true;
 }

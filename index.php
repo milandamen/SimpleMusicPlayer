@@ -7,6 +7,10 @@
  */
 
 require_once 'app/app.php';
+require_once 'app/config.php';
+//require_once 'database.php';
+require_once 'app/helpers.php';
+new App();
 
 if (isset($_GET['stream'])) {
     include 'app/stream.php';

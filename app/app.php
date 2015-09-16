@@ -6,10 +6,6 @@
  * Time: 13:55
  */
 
-require_once 'config.php';
-//require_once 'database.php';
-require_once 'helpers.php';
-
 class App {
     public static $config;
     public static $db;
@@ -23,4 +19,3 @@ class App {
     }
 }
 
-new App();

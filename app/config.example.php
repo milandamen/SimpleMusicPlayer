@@ -10,6 +10,7 @@
 
 class Config {
     public $music_dir = 'C:\music';             // Path to the directory that contains your music
+    public $cache_enabled = true;               // Use cache file to store music directory tree
     public $database = [                        // Database settings if you want to use a database
         'host' => 'localhost',                  // Host or IP of the database
         'port' => '3306',                       // Port at which the database runs
@@ -36,6 +37,6 @@ class Config {
         $this->art = (object) $this->art;
 
         // Remove trailing characters from path that we don't want.
-        $this->music_dir = rtrim($this->music_dir, ' \t\n\r\0\x0B\\|/');
+        $this->music_dir = rtrim($this->music_dir, " \t\n\r\0\x0B\\|/");
     }
 }
