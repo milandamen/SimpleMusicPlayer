@@ -15,11 +15,11 @@ include 'views/partials/header.php';
             Your browser does not support the audio tag.
         </audio>
         <span class="songName">No song playing.</span>
-        <button onclick="playPrevious();">
+        <button onclick="playNext();">
             Play Next
         </button>
-        <button onclick="playNext();">
-            Play Previous TODO
+        <button onclick="playPrevious();">
+            Play Previous
         </button>
     </div>
 
@@ -34,8 +34,11 @@ include 'views/partials/header.php';
 <?php
 try {
     $filelist = getFileList();
-
-    outputFileList($filelist);
+    if (count($filelist)) {
+        outputFileList($filelist);
+    } else {
+        echo 'No music found.';
+    }
 } catch (Exception $e) {
     die('An error occured! ' . $e->getMessage());
 }

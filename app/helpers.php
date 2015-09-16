@@ -26,6 +26,8 @@ function printArray(array $array) {
     echo '</ul>';
 }
 
+
+
 /**
  * Return a nested array of the folder and file structure inside $directory. It includes subdirectories.
  * @param $directory
@@ -38,9 +40,15 @@ function scandir_recursive($directory) {
     foreach (scandir($directory) as $folderItem) {
         if ($folderItem != "." AND $folderItem != ".." && checkPathBounds($directory.$folderItem)) {
             if (is_dir($directory.$folderItem)) {
-                $folderContents[$folderItem] = scandir_recursive( $directory.$folderItem );
+                $currentFolderContents = scandir_recursive( $directory.$folderItem );
+                if (count($currentFolderContents)) {
+                    $folderContents[$folderItem] = $currentFolderContents;
+                    printArray($folderContents[$folderItem]);
+                }
             } else {
-                $folderContents[] = $directory.$folderItem;
+                if (isMP3($folderItem)) {
+                    $folderContents[] = $directory . $folderItem;
+                }
             }
         }
     }
@@ -49,7 +57,8 @@ function scandir_recursive($directory) {
 }
 
 /**
- *
+ * Get the file list.
+ * @return array
  */
 function getFileList() {
     if (App::$config->cache_enabled) {
@@ -143,8 +152,11 @@ function fromSmpEntitiesPath($filePath) {
  * @return bool
  */
 function checkPath($filePath) {
-    return strpos($filePath, '/../') === false &&
-           strripos($filePath, '.mp3') === strlen($filePath) - 4;
+    return strpos($filePath, '/../') === false && isMP3($filePath);
+}
+
+function isMP3($filePath) {
+    return strripos($filePath, '.mp3') === strlen($filePath) - 4;
 }
 
 /**
