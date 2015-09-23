@@ -69,9 +69,13 @@ body {
 }
 
 #songListContainer li i {
-    background: url('plus.png');
+    background: url('song.png');
     width: 24px;
     height: 24px;
     display: inline-block;
     vertical-align: bottom;
+}
+
+#songListContainer li.song i {
+	background: url('folder.png');
 }
