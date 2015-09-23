@@ -128,6 +128,7 @@ function toSmpEntitiesPath($filePath) {
     $path = str_replace('"', 'smp-e=2', $path);
     $path = str_replace('?', 'smp-e=3', $path);
     $path = str_replace('&', 'smp-e=4', $path);
+	$path = str_replace('+', '%2B', $path);
     return $path;
 }
 
