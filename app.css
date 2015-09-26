@@ -46,6 +46,14 @@ body {
     overflow: auto;
 }
 
+#playlist .playing {
+    background: #a1a1a5;
+}
+
+#playlist li.d {
+    font-weight: bold;
+}
+
 #songListContainer {
     position: fixed;
     left: 0;
