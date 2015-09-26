@@ -72,8 +72,16 @@ body {
     padding-left: 0;
     margin-top: 0;
     padding-top: 0;
-    height: 100%;
     overflow: auto;
+
+    /* Firefox */
+    height: -moz-calc(100% - 24px);
+    /* WebKit */
+    height: -webkit-calc(100% - 24px);
+    /* Opera */
+    height: -o-calc(100% - 24px);
+    /* Standard */
+    height: calc(100% - 24px);
 }
 
 #songListContainer li i {
@@ -86,4 +94,18 @@ body {
 
 #songListContainer li.song i {
 	background: url('song.png');
+}
+
+#songListContainer div.addAllSongs {
+    background: lightgray;
+    width: 100%;
+    height: 24px;
+}
+
+#songListContainer div.addAllSongs i {
+    background: url('plus.png');
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    vertical-align: bottom;
 }

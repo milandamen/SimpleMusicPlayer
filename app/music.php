@@ -35,6 +35,10 @@ include 'views/partials/header.php';
 try {
     $filelist = getFileList();
     if (count($filelist)) {
+        echo '<div class="addAllSongs">';
+        echo '<a href="#player" onclick="addAllSongs();"><i></i>Add all songs</a>';
+        echo '</div>';
+
         outputFileList($filelist);
     } else {
         echo 'No music found.';

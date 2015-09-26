@@ -72,6 +72,12 @@ function addFolder(element) {
     });
 }
 
+function addAllSongs() {
+    $('#songListContainer li.song a').each(function() {
+        add(this);
+    });
+}
+
 function playIfFirstSong() {
     if (playlist.length == 1) {
         play(0);
