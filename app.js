@@ -32,12 +32,7 @@ function playPrevious() {
 /**************************************/
 
 function add(element) {
-    var scope = getScope(element);
-    if (scope !== '') {
-        scope = scope.substring(0, scope.length - 1);
-    } else {
-        scope = '/';
-    }
+    var scope = getSongScope(element);
 
     var song = {
         url: element.dataset.url,
@@ -101,6 +96,17 @@ function setPlaying(index, bool) {
 /*************************************/
 /************* Song Data *************/
 /*************************************/
+
+function getSongScope(element) {
+    var scope = getScope(element);
+    if (scope !== '') {
+        scope = scope.substring(0, scope.length - 1);
+    } else {
+        scope = '/';
+    }
+
+    return scope;
+}
 
 function getScope(element) {
     var dir = element.parentNode.parentNode.parentNode;
