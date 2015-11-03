@@ -19,5 +19,6 @@ if (checkPath($fullpath) && file_exists($fullpath)) {
     readfile($fullpath);
     die();
 } else {
-    die ('Error: File not found.');
+    http_response_code(404);
+    die('Error: File not found.');
 }
