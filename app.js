@@ -124,3 +124,24 @@ function getScope(element) {
 
     return '';
 }
+
+/**************************************/
+/****** Websocket remote control ******/
+/**************************************/
+
+window.addEventListener('load', function() {
+    var websocket = new WebSocket('ws://localhost:8088/ws');
+    websocket.onmessage = function(msg) {
+        if (msg.data === 'togglepause') {
+            if (player.paused) {
+                player.play();
+            } else {
+                player.pause();
+            }
+        } else if (msg.data === 'playnext') {
+            playNext();
+        } else if (msg.data === 'playprevious') {
+            playPrevious();
+        }
+    }
+});
