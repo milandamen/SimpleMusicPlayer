@@ -129,8 +129,14 @@ function getScope(element) {
 /****** Websocket remote control ******/
 /**************************************/
 
-window.addEventListener('load', function() {
+var connectWebsocket = function () {
     var websocket = new WebSocket('ws://localhost:8088/ws');
+    var unsetwebsocket = function() {
+        websocket.onmessage = null;
+        websocket.onerror = null;
+        websocket.onclose = null;
+    }
+
     websocket.onmessage = function(msg) {
         if (msg.data === 'togglepause') {
             if (player.paused) {
@@ -144,4 +150,15 @@ window.addEventListener('load', function() {
             playPrevious();
         }
     }
-});
+    websocket.onerror = function (e) {
+        websocket.close();
+        unsetwebsocket();
+        setTimeout(connectWebsocket, 1000);
+    }
+    websocket.onclose = function (e) {
+        unsetwebsocket();
+        setTimeout(connectWebsocket, 1000);
+    }
+};
+
+window.addEventListener('load', connectWebsocket);
